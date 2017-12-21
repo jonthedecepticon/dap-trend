@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Daplie</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#000000">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
+  <meta name="description" content="Daplie">
+  <meta name="viewport" content="width=device-width">
+
+  <meta property="og:title" content="Daplie"/>
+  <meta property="og:url" content="https://hero.daplie.com"/>
+  <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/blockchain-215cc.appspot.com/o/Gitlab-group-logo-b.png?alt=media&token=e7c5900c-8a7f-4d39-a166-62070d696c72"/>
+  <meta property="fb:app_id" content="1479806108781231"/>
+  <meta property="og:description" content="Daplie..."/>
+
+  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="styles/font-awesome.css">
+  <link rel="stylesheet" href="styles/app.css">
+  <script src="scripts/firebase.js"></script>
+
+  <script src="bower_components/jQuery/dist/jquery.js"></script>
+  <script src="bower_components/slick-carousel/slick/slick.js"></script>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBc5_OuxwkhQdpWeB8Dr7y2rsRJnIIAmU4",
+    authDomain: "blockchain-215cc.firebaseapp.com",
+    databaseURL: "https://blockchain-215cc.firebaseio.com",
+    projectId: "blockchain-215cc",
+    storageBucket: "blockchain-215cc.appspot.com",
+    messagingSenderId: "1093291403266"
+  };
+  firebase.initializeApp(config);
+  </script>
+
+  <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body ng-app="trendrr">
+  <!--[if lt IE 7]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- Views -->
+  <div ui-view="nav"></div>
+  <div ui-view="createModal"></div>
+  <div ui-view="body"></div>
+  <div ui-view="footer"></div>
+
+  <!--[if lt IE 9]>
+  <script src="bower_components/es5-shim/es5-shim.js"></script>
+  <script src="bower_components/json3/lib/json3.min.js"></script>
+  <![endif]-->
+
+  <!-- Bower components -->
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-slick-carousel/dist/angular-slick.min.js"></script>
+  <script src="bower_components/angular-stripe-checkout/angular-stripe-checkout.js"></script>
+  <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+
+  <script src="scripts/app.js"></script>
+  <script src="scripts/variables.js"></script>
+  <script src="scripts/ui-bootstrap-tpls-0.10.0.min.js"></script>
+  <!-- Services -->
+  <script src="scripts/services/postService.js"></script>
+  <script src="scripts/services/userService.js"></script>
+  <!-- Directives -->
+  <script src="scripts/directives/nav.js"></script>
+  <script src="scripts/directives/newFileUpload.js"></script>
+  <script src="scripts/directives/carousel/carousel.js"></script>
+  <script src="scripts/directives/social-share/social-share-uncache2.js"></script>
+  <script src="scripts/directives/posts-list/education-posts-list.js"></script>
+  <script src="scripts/directives/posts-list/investing-posts-list.js"></script>
+  <script src="scripts/directives/posts-list/coming-soon-posts-list.js"></script>
+  <script src="scripts/directives/number-only/number-only-input.js"></script>
+  <!-- Controllers -->
+  <script src="scripts/controllers/listCtrl.js"></script>
+  <script src="scripts/controllers/postCtrl.js"></script>
+  <script src="scripts/controllers/filterCtrl.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+      fbq('init', '1479806108781231');
+      fbq('track', "PageView");
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1479806108781231&ev=PageView&noscript=1"/>
+  </noscript>
+    <!-- <script type='text/javascript'>
+    var zaius=zaius||[];zaius.methods=["initialize","onload","event","entity","identify","anonymize","dispatch"];zaius.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);zaius.push(t);return zaius}};for(var i=0;i<zaius.methods.length;i++){var method=zaius.methods[i];zaius[method]=zaius.factory(method)}(function(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src=("https:"===document.location.protocol?"https://":"http://")+"d1igp3oop3iho5.cloudfront.net/v2/SRwls9MeMQpGIq7x3hqGFA/zaius-min.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+
+    // Edits to this script should only be made below this line.
+    zaius.event('pageview');
+  </script> -->
+  <!-- End Facebook Pixel Code -->
+</body>
+</html>

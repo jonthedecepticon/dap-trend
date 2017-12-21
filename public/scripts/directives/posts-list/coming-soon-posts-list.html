@@ -1,0 +1,38 @@
+<div class="container grid">
+  <div class="row" ng-if="user.admin">
+    <div class="col-md-12">
+      <h3>Pending Coming Soon Posts</h3>
+      <div class="col-md-4" ng-repeat="post in getPendingComingSoonPosts | orderBy:getTotalScore:true | filter: searchKeyword" ng-if="getPendingComingSoonPosts.length > 0">
+        <a href="#" ng-click="showPostModal(post)">
+          <figure class="effect-sadie card">
+            <img src="{{ post.logo.url }}" alt="{{ post.name }} logo">
+            <figcaption>
+              <h2>{{ post.totalDonated + post.totalVotes + post.facebookShares + post.twitterShares }}<br><span class="title">{{ post.name }}</span></h2>
+              <p ng-if="post.productName">{{ post.productName }}</p>
+              <p class="description" ng-if="!post.productName">{{ post.description }}</p>
+            </figcaption>
+          </figure>
+        </a>
+      </div>
+      <div ng-if="getPendingComingSoonPosts.length === 0">
+        <h5>No coming soon posts to be approved.</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3 ng-if="user.admin">Approved Coming Soon Posts</h3>
+      <div class="col-md-4" ng-repeat="post in comingSoonPosts | orderBy:getTotalScore:true| filter: searchKeyword">
+        <figure class="effect-sadie card" ng-click="showPostModal(post)">
+          <img src="{{ post.logo.url }}" alt="{{ post.name }} logo">
+          <figcaption>
+            <h2>{{ post.totalDonated + post.totalVotes + post.facebookShares + post.twitterShares }}<br><span class="title">{{ post.name }}</span></h2>
+            <p ng-if="post.productName">{{ post.productName }}</p>
+            <p class="description" ng-if="!post.productName">{{ post.description }}</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>

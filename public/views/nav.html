@@ -1,0 +1,17 @@
+<div class="top-nav">
+  <div class="content">
+    <div class="top-nav-left">
+      <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/blockchain-215cc.appspot.com/o/Gitlab-group-logo-b.png?alt=media&token=e7c5900c-8a7f-4d39-a166-62070d696c72" style="width: 40px; float: left;" alt="hero logo" />
+      <ul class="nav navbar-nav">
+        <li class="link-item"><a href="#education" ng-click="switchView('education')">Education</a></li>
+        <li class="link-item"><a href="#investing" ng-click="switchView('investing')">Investing</a></li>
+        <li class="link-item"><a href="#comingSoon" ng-click="switchView('comingSoon')">Coming Soon</a></li>
+      </ul>
+    </div>
+    <div class="top-nav-right" ng-controller="LoginCtrl">
+      <span class="revealEmailList" ng-if="user.admin" ng-click="toggleEmails()">Toggle email list</span>
+      <a ng-if="!user.picture" class="user-nav" ng-click="submitLogin()"><i class="fa fa-user"></i></a>
+      <img ng-if="user.picture" class="fr square-circle profile" ng-click="selectedPerson = list[userID]" src="{{ user.picture }}">
+    </div>
+  </div>
+</div>
