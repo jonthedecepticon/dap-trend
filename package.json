@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "dependencies" : {
-    "express"    : "~4.7.2",
-    "morgan"     : "~1.2.2",
+  "dependencies": {
+    "express": "~4.7.2",
+    "morgan": "~1.2.2",
     "body-parser": "~1.5.2",
     "jsonwebtoken": "^5.0.2",
     "method-override": "~2.1.2"
@@ -19,5 +19,12 @@
     "url": "git@gitlab.daplie.com:jonthedecepticon/daplie-trend.git"
   },
   "author": "Jon Lambson <jon.lambson@daplie.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "node-sass": "^3.10.1",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
+  }
 }
