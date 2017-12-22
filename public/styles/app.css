@@ -8031,7 +8031,7 @@ button.close {
 *
 */
 /****************************\
-	LAYOUT
+  LAYOUT
 \****************************/
 /* line 11, ../sass/_shorthand.scss */
 .pad0 {
@@ -8518,7 +8518,7 @@ button.close {
 }
 
 /****************************\
-	TEXT
+  TEXT
 \****************************/
 /* line 117, ../sass/_shorthand.scss */
 .italic {
@@ -8669,7 +8669,7 @@ button.close {
 }
 
 /****************************\
-	BACKGROUND
+  BACKGROUND
 \****************************/
 /* line 162, ../sass/_shorthand.scss */
 .bg-white {
@@ -8709,7 +8709,7 @@ button.close {
 /* - - - - - - - - - - - - - *\
 
   #HEADER
-  
+
 \* - - - - - - - - - - - - - */
 /* line 9, ../sass/_header.scss */
 .top-nav {
@@ -8737,7 +8737,7 @@ button.close {
 /* - - - - - - - - - - - - - *\
 
   #LEFT NAV
-  
+
 \* - - - - - - - - - - - - - */
 /* line 43, ../sass/_header.scss */
 .top-nav-left {
@@ -8766,7 +8766,7 @@ button.close {
 /* - - - - - - - - - - - - - *\
 
   #RIGHT NAV
-  
+
 \* - - - - - - - - - - - - - */
 /* line 76, ../sass/_header.scss */
 .top-nav-right {
@@ -8879,7 +8879,7 @@ footer {
 }
 
 /*------------------------------------*\
-	#Modal
+  #Modal
 \*------------------------------------*/
 /* line 6, ../sass/_modal.scss */
 .modal {
@@ -8950,7 +8950,7 @@ footer {
 }
 
 /*------------------------------------*\
-	#GENERAL
+  #GENERAL
 \*------------------------------------*/
 /* line 5, ../sass/_trendrr.scss */
 /*div[class*=' col'], div[class^='col'] {*/
@@ -9037,7 +9037,7 @@ a {
 }
 
 /*------------------------------------*\
-	#BANNER
+  #BANNER
 \*------------------------------------*/
 /* line 50, ../sass/_trendrr.scss */
 .banner {
@@ -9112,7 +9112,7 @@ a {
 }
 
 /*------------------------------------*\
-	#ITEM
+  #ITEM
 \*------------------------------------*/
 /* line 125, ../sass/_trendrr.scss */
 .item-info p {
@@ -9286,7 +9286,7 @@ a {
 }
 
 /*------------------------------------*\
-	#BTN
+  #BTN
 \*------------------------------------*/
 /* line 262, ../sass/_trendrr.scss */
 .btn-facebook {
@@ -9779,7 +9779,7 @@ figure.effect-sadie p {
 .revealEmailList{
   margin-right: 15px;
   position: relative;
-  top: 7px;
+  top: 10px;
 }
 .shortDescription{
   overflow: hidden;

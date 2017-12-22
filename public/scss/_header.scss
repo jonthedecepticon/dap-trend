@@ -1,9 +1,5 @@
-
-
 /* - - - - - - - - - - - - - *\
-
   #HEADER
-
 \* - - - - - - - - - - - - - */
 
 .top-nav {
@@ -16,9 +12,9 @@
   display: inline-block;
 
   img {
-    max-height: 22px;
+    max-height: 50px;
     &.profile{
-      margin: 6px;
+      margin: 0px;
     }
   }
 
@@ -30,14 +26,8 @@
   }
 }
 
-
-
-
-
 /* - - - - - - - - - - - - - *\
-
   #LEFT NAV
-
 \* - - - - - - - - - - - - - */
 
 .top-nav-left {
@@ -66,22 +56,16 @@
   -webkit-transition: all .3s;
 }
 
-
-
-
-
-
 /* - - - - - - - - - - - - - *\
-
   #RIGHT NAV
-
 \* - - - - - - - - - - - - - */
 
 
 .top-nav-right{
-   float: right;
-    cursor: pointer;
-    overflow: hidden;
+  float: right;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 10px;
 }
 
 .search-nav{
