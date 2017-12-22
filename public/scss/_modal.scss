@@ -1,0 +1,65 @@
+
+/*------------------------------------*\
+	#Modal
+\*------------------------------------*/
+
+.modal {
+	overflow: auto;
+	h5,h4,p{
+		text-align: center;
+		i{
+			padding: 1px;
+		}
+	}
+
+	.action-bar {
+		background-color: 	  #FBFBFB;
+		margin-bottom: 25px;
+		.share-icons {
+			margin-top: -77px;
+		}
+	}
+
+	.favorite-button {
+		position: absolute;
+		right: 25px;
+		top: 55px;
+		line-height: 17px;
+		padding: 0px;
+		width: inherit;
+		opacity: .6;
+
+		i{
+			padding: 10px 10px 8px 10px;
+		}
+	}
+
+	.main-display {
+		img {
+			margin-bottom: 20px;
+		}
+	}
+}
+
+.leaveModal{
+	opacity: .4;
+	font-size: 19px;
+	&:hover{
+		opacity: .5;
+		cursor: pointer;
+	}
+}
+
+.modal-body {
+	padding: 0;
+}
+
+.modal-dialog {
+	padding: 0;
+}
+
+.modal-content {
+	border: none;
+	padding: 10px;
+	overflow-x: hidden;
+}

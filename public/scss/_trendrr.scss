@@ -1,0 +1,292 @@
+
+/*------------------------------------*\
+  #GENERAL
+\*------------------------------------*/
+
+  .content {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 10px;
+  }
+
+  .deal-banner {
+    margin: 0 0 1.33% 0;
+
+    .col-sm-6:nth-child(2) {
+      margin-right: 0;
+    }
+  }
+
+  button .fa-heart, button .fa-heart-o {
+    font-size: 16px;
+    padding: 1px;
+    cursor: pointer;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .main-list {
+    padding: 10px 0 15px;
+    overflow: auto;
+  }
+
+  a{
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+/*------------------------------------*\
+  #BANNER
+\*------------------------------------*/
+
+.banner{
+  background: url(https://firebasestorage.googleapis.com/v0/b/trendrr-8f523.appspot.com/o/mountain-bg.jpg?alt=media&token=95a61ab7-6688-48b8-8b80-4f120a02b8d9) bottom center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  padding: 57px 0 45px;
+
+
+  h1{
+    color: #ffffff;
+    font-family: 'abel';
+    font-weight: 300;
+    display: inline-block;
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+  h2{
+    font-size: 2em;
+    margin: -30px 0 0 0;
+    font-weight: 900;
+    line-height: 36px;
+  }
+
+  a{
+    color: $white;
+    opacity: .5;
+  }
+  input{
+    background: rgba(255, 255, 255, 0.4);
+    font-weight: 100;
+    color: #fff;
+    border-radius: 4px;
+    text-align: left;
+    padding: 5px 9px 7px 7px;
+    font-size: 18px;
+    line-height: normal;
+    border: none;
+    width: 300px;
+    display: inherit;
+    margin: 0 auto;
+    transition: all .3s;
+    &:focus{
+      background: rgba(255, 255, 255, 0.6);
+      transition: all .3s;
+    }
+  }
+  input::-webkit-input-placeholder {
+    color: #fff;
+  }
+}
+
+.banner-actions{
+  text-align: center;
+}
+
+.deal-banner-logo{
+  img{
+    display: block;
+      margin-left: auto;
+      margin-right: auto;
+    height: 120px;
+    }
+}
+
+
+
+/*------------------------------------*\
+  #ITEM
+\*------------------------------------*/
+.item-info {
+  p {
+    margin: 0;
+  }
+}
+
+.item {
+  text-align: left;
+  display: inline-block;
+  overflow: hidden;
+  margin: 5px;
+  cursor: pointer;
+  margin: 0 1% 1% 0;
+
+}
+
+.item:after {
+content: "";
+width: 124px;
+text-align: left;
+display: inline-block;
+overflow: hidden;
+text-align: center;
+position: absolute;
+z-index: -1;
+opacity: .6;
+margin-top: -4px;
+margin-left: 7px;
+box-shadow: 0px 0px 8px 2px #000000;
+}
+
+.item-info {
+  position: relative;
+  padding: 5px;
+  border: 1px solid #e5e5e5;
+  overflow: auto;
+  margin-top: -2px;
+  background-color: #ffffff;
+}
+
+.item img {
+width: 100%;
+height: 128px;
+background-color: #efefef;
+}
+
+.item-img-wrapper {
+  height: 89px;
+  width: 150px;
+}
+
+.orange-circle {
+  background-color: #f0b23a;
+  border-radius: 50%;
+  padding: 4px;
+  color: #ffffff;
+  font-weight: 700;
+  position: relative;
+
+}
+
+
+  .item-hover-information {
+    text-align: center;
+    overflow: hidden;
+
+    // needs to span full width of image
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    left: 0;
+
+    .bottom-buttons {
+      padding: 16px;
+      div{
+        cursor: pointer;
+      }
+    }
+  }
+
+  .main-display {
+    position: relative;
+
+    img {
+      transition: all .5s;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+
+  .share-icons {
+    width: 100%;
+    bottom: -49px;
+    position: absolute;
+
+    .fa { // bootstrap override
+      line-height: 50px;
+    }
+
+    a {
+      background-color: #fff;
+      text-align: center;
+      width: 20%;
+      display: block;
+      float: left;
+      font-size: 22px;
+      border-right: 1px solid $grayLighter;
+
+      &:last-child {
+        border-right: none;
+      }
+      &.google:hover{ background-color: $pink; i { color: #fff; } }
+      &.facebook:hover{ background-color: $blueDark; i { color: #fff; } }
+      &.twitter:hover{ background-color: $blue; i { color: #fff; } }
+      &.pinterest:hover{ background-color: #991c1c; i { color: #fff; } }
+      &.envelope:hover{ background-color: $grayLight; i { color: #fff; } }
+
+    }
+
+  }
+
+
+  .close-share{
+    display: none;
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    top: 31%; right: 0; left: 0;
+    background-color:rgba(255,255,255, .5);
+    margin: 0 auto;
+
+  }
+
+
+/*------------------------------------*\
+  #BTN
+\*------------------------------------*/
+
+.btn-facebook {
+  background-color:#5670A1 !important;
+  margin-top: 10px;
+  padding: 10px 0px 10px 0px;
+}
+
+.btn-twitter {
+  background-color: #59AADF !important;
+  margin-top: 10px !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.modal-login .btn-facebook {
+  position: absolute;
+  background-color:#5670A1 !important;
+  margin-top: 10px;
+  padding: 10px 0px 10px 0px;
+  top: -203px !important;
+  cursor: pointer;
+}
+
+.modal-login .btn-twitter {
+  background-color: #59AADF !important;
+  margin-top: 10px !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  top: -130px !important;
+  cursor: pointer;
+}
+
+
+.add_field_button {
+  margin-bottom: 15px;
+}
