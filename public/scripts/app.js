@@ -20,7 +20,7 @@ angular.module('trendrr', [
   };
   var createModal = {
         templateUrl: 'views/createModal.html',
-        // controller: 'listCtrl',
+        controller: 'listCtrl',
         // resolve: {
         //   user: function (userService) {
         //     return userService.get();

@@ -14,31 +14,50 @@ angular.module('trendrr')
     amount: 10
   };
 
+  $scope.whereAmI = 'list controller';
+
   $scope.user = userService.user;
   $scope.emails = userService.startupOwnerEmails;
   $scope.param = $stateParams;
 
-  $scope.educationView = true;
   $scope.switchView = function(view) {
     switch (view) {
       case 'education':
-      $scope.educationView = true;
-      $scope.investingView = false;
-      $scope.comingSoonView = false;
+        $scope.educationView = true;
+        $scope.investingView = false;
+        $scope.comingSoonView = false;
+        $rootScope.currentView = 'educationView';
       break;
       case 'investing':
-      $scope.investingView = true;
-      $scope.comingSoonView = false;
-      $scope.educationView = false;
+        $scope.investingView = true;
+        $scope.comingSoonView = false;
+        $scope.educationView = false;
+        $rootScope.currentView = 'investingView';
       break;
       case 'comingSoon':
-      $scope.comingSoonView = true;
-      $scope.investingView = false;
-      $scope.educationView = false;
+        $scope.comingSoonView = true;
+        $scope.investingView = false;
+        $scope.educationView = false;
+        $rootScope.currentView = 'comingSoonView';
       break;
       default:
     }
   };
+
+  $rootScope.$watch('currentView', function (view) {
+    if (view !== undefined) {
+      $scope.currentView = view;
+      if (view === 'education') {
+        $scope.educationView = true;
+      } else if (view === 'investing') {
+        $scope.investingView = true;
+      } else if (view === 'comingSoon') {
+        $scope.comingSoonView = true;
+      }
+    } else {
+      $scope.currentView = 'educationView';
+    }
+  });
 
   // login prompt
   $scope.loginPrompt = function(){
@@ -104,8 +123,10 @@ angular.module('trendrr')
     $("#modal").modal('hide');
   };
 
+
   $scope.vote = function () {
     var user = userService.user;
+    console.log(user);
     if('uuid' in user){
       var voted = false;
       //could be replaced with $indexFor but why not loop through data we already have instead of double fetching it
@@ -162,7 +183,7 @@ angular.module('trendrr')
     $scope.modalLoaded = false;
     $("#modal").modal('hide');
   };
-  
+
   /* - - - - - - - - - - - - - - - - - - *\
   #OVERALL SCORE
   \* - - - - - - - - - - - - - - - - - - */

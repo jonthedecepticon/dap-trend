@@ -1,7 +1,4 @@
 <nav></nav>
-<!-- - - - - - ->
-  Banner
-< - - - - - - -->
 
 <div class="col" id="center">
   <section class='banner'>
@@ -14,16 +11,18 @@
     </div>
 
     <input class="mar30b bold" type='search' ng-model='searchKeyword' placeholder="Search..." autofocus>
+    <h1>{{ currentView }}</h1>
+    <h1>{{ whereAmI }}</h1>
 
-    <div class='banner-actions' ng-if="educationView">
+    <div class='banner-actions' ng-if="currentView == 'educationView'">
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'education')" id='createBtn'>Submit an Education Post</a>
       <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('education')" id='createBtnEducation'>Log in to Submit an Education Post</a>
     </div>
-    <div class='banner-actions' ng-if="investingView">
+    <div class='banner-actions' ng-if="currentView == 'investingView'">
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'investing')" id='createBtn'>Submit an Investing Post</a>
       <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('investing')" id='createBtnInvesting'>Log in to Submit an Investing Post</a>
     </div>
-    <div class='banner-actions' ng-if="comingSoonView">
+    <div class='banner-actions' ng-if="currentView == 'comingSoonView'">
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'comingSoon')" id='createBtn'>Submit an Coming Soon Post</a>
       <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('comingSoon')" id='createBtnComingSoon'>Log in to Submit an Coming Soon Post</a>
     </div>
@@ -63,13 +62,13 @@
   </div>
 </div>
 
-<div ng-if="educationView">
+<div ng-if="currentView == 'educationView'">
   <education-posts-list searchKeyword="searchKeyword"></education-posts-list>
 </div>
-<div ng-if="investingView">
+<div ng-if="currentView == 'investingView'">
   <investing-posts-list searchKeyword="searchKeyword"></investing-posts-list>
 </div>
-<div ng-if="comingSoonView">
+<div ng-if="currentView == 'comingSoonView'">
   <coming-soon-posts-list searchKeyword="searchKeyword"></coming-soon-posts-list>
 </div>
 
@@ -108,7 +107,7 @@
               <div class="sb-template" style="color:black"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Approve Company</div>
             </button>
           </div>
-          <h2>{{ selectedCompany.name }}<span ng-if="selectedCompany.productName"> - {{ selectedCompany.productName }}</span></h2>
+          <h2>{{ selectedCompany.name }}<span ng-if="selectedCompany.productName"> - {{ selectedCompany.productName }}</span> <span>{{ selectedCompany.$id }}</span></h2>
           <i ng-click="hideCompanyModal()" class="fa fa-times closeModal" aria-hidden="true"></i>
           <div class="row">
             <div class="carousel-wrapper col-md-12">
@@ -190,7 +189,7 @@
 
 <!-- CREATE -->
 <script type="text/javascript">
-window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f) }})}(document,"script","twitter-wjs"));
+  window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f) }})}(document,"script","twitter-wjs"));
 </script>
 
 </div>
