@@ -205,11 +205,18 @@ angular.module('trendrr').factory('postService', function postService($rootScope
             });
         },
         approveCompany: function (companyId) {
-            var ref = firebase.database().ref().child('education-posts').child(companyId);
-            $firebaseObject(ref).$loaded(function (company) {
-                company.approved = true;
-                company.$save();
-            });
+          var ref;
+          if ($rootScope.currentView === 'educationView') {
+            ref = firebase.database().ref().child('education-posts').child(companyId);
+          } else if ($rootScope.currentView === 'investingView') {
+            ref = firebase.database().ref().child('investing-posts').child(companyId);
+          } else if ($rootScope.currentView === 'comingSoonView') {
+            ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+          }
+          $firebaseObject(ref).$loaded(function (company) {
+            company.approved = true;
+            company.$save();
+          });
         },
         companySubmitted: function(state){
             angular.copy(state, companySubmitted);
