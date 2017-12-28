@@ -105,8 +105,6 @@ angular.module('trendrr').controller('LoginCtrl', function ($scope, $firebaseAut
           $scope.addUserToUsersArray(authData);
         }
       });
-      console.log($rootScope.currentView);
-      debugger;
     }).catch(function (error) {
       console.log(error);
     });
