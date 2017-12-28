@@ -109,44 +109,35 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
     if(fileNameSplit[fileNameSplit.length - 1] === 'jpg' || fileNameSplit[fileNameSplit.length - 1] === 'png') {
       var fileName = guid() + '.' + fileNameSplit[fileNameSplit.length - 1];
       var storageRef;
-      // if ($scope.educationView) {
-      //   storageRef = firebase.storage().ref('education-posts/photos/' + fileName);
-      // } else if ($scope.investingView) {
-      //   storageRef = firebase.storage().ref('investing-posts/photos/' + fileName);
-      // } else if ($scope.comingSoonView) {
-      //   storageRef = firebase.storage().ref('coming-soon-posts/photos/' + fileName);
-      // }
-
-      storageRef = firebase.storage().ref('education-posts/photos/' + fileName);
-
+      if ($rootScope.currentView === 'educationView') {
+        storageRef = firebase.storage().ref('education-posts/photos/' + fileName);
+      } else if ($rootScope.currentView === 'investingView') {
+        storageRef = firebase.storage().ref('investing-posts/photos/' + fileName);
+      } else if ($rootScope.currentView === 'comingSoonView') {
+        storageRef = firebase.storage().ref('coming-soon-posts/photos/' + fileName);
+      }
       var storage = $firebaseStorage(storageRef);
       var uploadTask = storage.$put(files[0]);
       uploadTask.$complete(function (result) {
-        // if ($scope.educationView) {
-        //   $scope.newPost.attachments.push({
-        //     url: result.downloadURL,
-        //     filename: fileName,
-        //     bucket: 'education-posts/photos/'
-        //   });
-        // } else if ($scope.investingView) {
-        //   $scope.newPost.attachments.push({
-        //     url: result.downloadURL,
-        //     filename: fileName,
-        //     bucket: 'investing-posts/photos/'
-        //   });
-        // } else if ($scope.comingSoonView) {
-        //   $scope.newPost.attachments.push({
-        //     url: result.downloadURL,
-        //     filename: fileName,
-        //     bucket: 'coming-soon-posts/photos/'
-        //   });
-        // }
-
-        $scope.newPost.attachments.push({
-          url: result.downloadURL,
-          filename: fileName,
-          bucket: 'education-posts/photos/'
-        });
+        if ($rootScope.currentView === 'educationView') {
+          $scope.newPost.attachments.push({
+            url: result.downloadURL,
+            filename: fileName,
+            bucket: 'education-posts/photos/'
+          });
+        } else if ($rootScope.currentView === 'investingView') {
+          $scope.newPost.attachments.push({
+            url: result.downloadURL,
+            filename: fileName,
+            bucket: 'investing-posts/photos/'
+          });
+        } else if ($rootScope.currentView === 'comingSoonView') {
+          $scope.newPost.attachments.push({
+            url: result.downloadURL,
+            filename: fileName,
+            bucket: 'coming-soon-posts/photos/'
+          });
+        }
       });
     } else{
       alert('File type not supported, please upload a jpg or png.');
@@ -170,42 +161,35 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
     if(fileNameSplit[fileNameSplit.length - 1] === 'jpg' || fileNameSplit[fileNameSplit.length - 1] === 'png') {
       var fileName = guid() + '.' + fileNameSplit[fileNameSplit.length - 1];
       var storageRef;
-      // if ($scope.educationView) {
-      //   storageRef = firebase.storage().ref('education-posts/logos/' + fileName);
-      // } else if ($scope.investingView) {
-      //   storageRef = firebase.storage().ref('investing-posts/logos/' + fileName);
-      // } else if ($scope.comingSoonView) {
-      //   storageRef = firebase.storage().ref('coming-soon-posts/logos/' + fileName);
-      // }
-
-      storageRef = firebase.storage().ref('education-posts/logos/' + fileName);
+      if ($rootScope.currentView === 'educationView') {
+        storageRef = firebase.storage().ref('education-posts/logos/' + fileName);
+      } else if ($rootScope.currentView === 'investingView') {
+        storageRef = firebase.storage().ref('investing-posts/logos/' + fileName);
+      } else if ($rootScope.currentView === 'comingSoonView') {
+        storageRef = firebase.storage().ref('coming-soon-posts/logos/' + fileName);
+      }
       var storage = $firebaseStorage(storageRef);
       var uploadTask = storage.$put(files[0]);
       uploadTask.$complete(function(result) {
-        // if ($scope.educationView) {
-        //   $scope.newPost.logo = {
-        //     url: result.downloadURL,
-        //     filename: fileName,
-        //     bucket: 'education-posts/logos/'
-        //   };
-        // } else if ($scope.investingView) {
-        //   $scope.newPost.logo = {
-        //     url: result.downloadURL,
-        //     filename: fileName,
-        //     bucket: 'investing-posts/logos/'
-        //   };
-        // } else if ($scope.comingSoonView) {
-        //   $scope.newPost.logo = {
-        //     url: result.downloadURL,
-        //     filename: fileName,
-        //     bucket: 'coming-soon-posts/logos/'
-        //   };
-        // }
-        $scope.newPost.logo = {
-          url: result.downloadURL,
-          filename: fileName,
-          bucket: 'education-posts/logos/'
-        };
+        if ($rootScope.currentView === 'educationView') {
+          $scope.newPost.logo = {
+            url: result.downloadURL,
+            filename: fileName,
+            bucket: 'education-posts/logos/'
+          };
+        } else if ($rootScope.currentView === 'investingView') {
+          $scope.newPost.logo = {
+            url: result.downloadURL,
+            filename: fileName,
+            bucket: 'investing-posts/logos/'
+          };
+        } else if ($rootScope.currentView === 'comingSoonView') {
+          $scope.newPost.logo = {
+            url: result.downloadURL,
+            filename: fileName,
+            bucket: 'coming-soon-posts/logos/'
+          };
+        }
       });
     } else{
       alert('File type not supported, please upload a jpg or png.');

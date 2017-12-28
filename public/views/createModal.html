@@ -5,59 +5,414 @@
         <svg class="animated zoomIn pull-right" width=".5cm" height=".5cm" viewBox="0 0 400 400"> <g stroke="#999999"><line x1="100" y1="300" x2="300" y2="100" stroke-width="20"></line> <line x1="100" y1="100" x2="300" y2="300" stroke-width="20"></line></g></svg><i class="icon-remove"></i>
       </div>
       <div class="modal-body mar20t">
-        <div class="">
-          <h1 ng-if="currentView == 'educationView'">EDUCATION</h1>
-          <h1 ng-if="currentView == 'investingView'">INVESTING</h1>
-          <h1 ng-if="currentView == 'comingSoonView'">COMING SOON</h1>
-        </div>
-        <hr>
-
-
+        <!-- - - - - - ->
+          Education Posts
+        < - - - - - - -->
         <div ng-if="currentView == 'educationView'">
           <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createCompany('education')">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="companyName">Company Name (education):</label>
-                <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+            <div class="col-md-12">
+              <h2 ng-if="educationView" class="text-center">Submit an Education Post</h2>
+              <h2 ng-if="investingView" class="text-center">Submit an Investing Post</h2>
+              <h2 ng-if="comingSoonView" class="text-center">Submit a Coming Soon Post</h2>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="companyName">Company Name:</label>
+                  <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="companyProductName">Product/Tech Name (if different)</label>
+                  <input id="companyProductName" class='form-control' placeholder="Name of product technology" ng-model="newPost.productName">
+                </div>
               </div>
             </div>
-            <div class="col-md-12 text-right">
-              <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="newLogo">Logo (required, jpg or png):</label><br>
+                  <div class="row">
+                    <div class="col-md-3" ng-if="newPost.logo.url">
+                      <input class="hidden" type="text" ng-model="newPost.logo.url">
+                      <input class="hidden" type="text" ng-model="newPost.logo.filename">
+                      <input class="hidden" type="text" ng-model="newPost.logo.bucket">
+                      <!--<div class="img-preview" style="background-image: url({{ newPost.logo.url }})"></div>-->
+                      <div class="img-preview">
+                        <img src="{{ newPost.logo.url }}" alt="company logo">
+                      </div>
+                      <button class="btn-danger btn-delete-photo" ng-click="removeLogo(newPost.logo.bucket, newPost.logo.filename)">Remove</button>
+                    </div>
+                    <div class="newFile text-center col-md-3" ng-if="!newPost.logo.url">
+                      <input type="file" name="file" id="newLogo" class="inputfile" onchange="angular.element(this).scope().logoUpdate(this.files)" ng-model="addNewLogoUpload"/>
+                      <label for="newLogo">Choose a file</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="newFile">Product Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
+                  <div class="row">
+                    <div class="photoPreview col-md-3" ng-repeat="photo in newPost.attachments track by $index">
+                      <input class="hidden" type="text" ng-model="photo.url">
+                      <input class="hidden" type="text" ng-model="photo.filename">
+                      <input class="hidden" type="text" ng-model="photo.bucket">
+                      <!--<div class="img-preview" style="background-image: url({{ photo.url }})"></div>-->
+                      <div class="img-preview">
+                        <img src="{{ photo.url }}" alt="company logo">
+                      </div>
+                      <button class="btn-danger btn-delete-photo" ng-click="removePhoto(photo.bucket, photo.filename)">Remove</button>
+                    </div>
+                    <div class="newFile text-center col-md-3" ng-if="newPost.attachments.length < 4">
+                      <input type="file" name="file" id="newFile" class="inputfile" onchange="angular.element(this).scope().fileUpdate(this.files)" ng-model="addNewFileUpload"/>
+                      <label for="newFile">Choose a file</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <input class='hidden' ng-model="newPost.video">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="companyVideo">Video Url:</label>
+                  <input type="text" id="companyVideo" class='form-control' placeholder="Video URL" ng-model="rawVideoUrl" ng-change="updateVideoUrl()">
+                </div>
+              </div>
+              <!--<div class="col-md-12">-->
+              <!--<div class="form-group">-->
+              <!--<label for="companyVideo">Video Embed Code:</label>-->
+              <input class='hidden' placeholder="Video embed code" ng-model="newPost.video">
+              <!--</div>-->
+              <!--</div>-->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="website">Website or Crowdfunding Link:</label>
+                  <input id="website" class='form-control' placeholder="Website or Crowdfunding Link" ng-model="newPost.website">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="paypal">Paypal email (for accepting donations via this site):</label>
+                  <input id="paypal" class='form-control' placeholder="eric@clapton.com" ng-model="newPost.paypal">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="description">Product Description:</label>
+                  <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
+                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <input type="checkbox" value="" required>
+                  <label>
+                    I agree to the <a target="_blank" href="https://firebasestorage.googleapis.com/v0/b/trendrr-8f523.appspot.com/o/terms-and-conditions.pdf?alt=media&token=df816584-1d20-4ba0-8476-d64437abbd0c">Crowdfund Hero Crowdfunding Competition Terms, Rules & Conditions.</a>
+                    <ul>
+                      <li>I am Utah-based company now or will be by May 1, 2017.</li>
+                      <li>My idea/product is a physical product (i.e., personal electronics, hardware device, clothing, tool, etc.), video game, or software-enabled hardware.</li>
+                      <li>My company does not have higher than $10 million in revenue or equity funding.</li>
+                      <li>I will not donate my own money to my startup to boost my company's score.</li>
+                      <li>I understand that all donations will be dispersed at the amount after merchant fees ($0.30 + 2.9% per transaction)</li>
+                    </ul>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <label><input type="checkbox" ng-model="sbdcClient">Click if you are an SBDC client. Entrants must be a Utah SBDC client to submit. Click <a target="_blank" href="https://utahsbdc.org/request-consulting">here</a> to become an SBDC client. It’s free.</label>
+                </div>
+              </div>
+              <div class="col-md-12 text-right">
+                <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
+              </div>
             </div>
           </form>
         </div>
-
+        <!-- - - - - - ->
+          Investing Posts
+        < - - - - - - -->
         <div ng-if="currentView == 'investingView'">
           <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createCompany('investing')">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="companyName">Company Name (Investing):</label>
-                <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+            <div class="col-md-12">
+              <h2 ng-if="educationView" class="text-center">Submit an Education Post</h2>
+              <h2 ng-if="investingView" class="text-center">Submit an Investing Post</h2>
+              <h2 ng-if="comingSoonView" class="text-center">Submit a Coming Soon Post</h2>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="companyName">Company Name:</label>
+                  <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="companyProductName">Product/Tech Name (if different)</label>
+                  <input id="companyProductName" class='form-control' placeholder="Name of product technology" ng-model="newPost.productName">
+                </div>
               </div>
             </div>
-            <div class="col-md-12 text-right">
-              <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="newLogo">Logo (required, jpg or png):</label><br>
+                  <div class="row">
+                    <div class="col-md-3" ng-if="newPost.logo.url">
+                      <input class="hidden" type="text" ng-model="newPost.logo.url">
+                      <input class="hidden" type="text" ng-model="newPost.logo.filename">
+                      <input class="hidden" type="text" ng-model="newPost.logo.bucket">
+                      <!--<div class="img-preview" style="background-image: url({{ newPost.logo.url }})"></div>-->
+                      <div class="img-preview">
+                        <img src="{{ newPost.logo.url }}" alt="company logo">
+                      </div>
+                      <button class="btn-danger btn-delete-photo" ng-click="removeLogo(newPost.logo.bucket, newPost.logo.filename)">Remove</button>
+                    </div>
+                    <div class="newFile text-center col-md-3" ng-if="!newPost.logo.url">
+                      <input type="file" name="file" id="newLogo" class="inputfile" onchange="angular.element(this).scope().logoUpdate(this.files)" ng-model="addNewLogoUpload"/>
+                      <label for="newLogo">Choose a file</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="newFile">Product Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
+                  <div class="row">
+                    <div class="photoPreview col-md-3" ng-repeat="photo in newPost.attachments track by $index">
+                      <input class="hidden" type="text" ng-model="photo.url">
+                      <input class="hidden" type="text" ng-model="photo.filename">
+                      <input class="hidden" type="text" ng-model="photo.bucket">
+                      <!--<div class="img-preview" style="background-image: url({{ photo.url }})"></div>-->
+                      <div class="img-preview">
+                        <img src="{{ photo.url }}" alt="company logo">
+                      </div>
+                      <button class="btn-danger btn-delete-photo" ng-click="removePhoto(photo.bucket, photo.filename)">Remove</button>
+                    </div>
+                    <div class="newFile text-center col-md-3" ng-if="newPost.attachments.length < 4">
+                      <input type="file" name="file" id="newFile" class="inputfile" onchange="angular.element(this).scope().fileUpdate(this.files)" ng-model="addNewFileUpload"/>
+                      <label for="newFile">Choose a file</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <input class='hidden' ng-model="newPost.video">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="companyVideo">Video Url:</label>
+                  <input type="text" id="companyVideo" class='form-control' placeholder="Video URL" ng-model="rawVideoUrl" ng-change="updateVideoUrl()">
+                </div>
+              </div>
+              <!--<div class="col-md-12">-->
+              <!--<div class="form-group">-->
+              <!--<label for="companyVideo">Video Embed Code:</label>-->
+              <input class='hidden' placeholder="Video embed code" ng-model="newPost.video">
+              <!--</div>-->
+              <!--</div>-->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="website">Website or Crowdfunding Link:</label>
+                  <input id="website" class='form-control' placeholder="Website or Crowdfunding Link" ng-model="newPost.website">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="paypal">Paypal email (for accepting donations via this site):</label>
+                  <input id="paypal" class='form-control' placeholder="eric@clapton.com" ng-model="newPost.paypal">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="description">Product Description:</label>
+                  <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
+                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <input type="checkbox" value="" required>
+                  <label>
+                    I agree to the <a target="_blank" href="https://firebasestorage.googleapis.com/v0/b/trendrr-8f523.appspot.com/o/terms-and-conditions.pdf?alt=media&token=df816584-1d20-4ba0-8476-d64437abbd0c">Crowdfund Hero Crowdfunding Competition Terms, Rules & Conditions.</a>
+                    <ul>
+                      <li>I am Utah-based company now or will be by May 1, 2017.</li>
+                      <li>My idea/product is a physical product (i.e., personal electronics, hardware device, clothing, tool, etc.), video game, or software-enabled hardware.</li>
+                      <li>My company does not have higher than $10 million in revenue or equity funding.</li>
+                      <li>I will not donate my own money to my startup to boost my company's score.</li>
+                      <li>I understand that all donations will be dispersed at the amount after merchant fees ($0.30 + 2.9% per transaction)</li>
+                    </ul>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <label><input type="checkbox" ng-model="sbdcClient">Click if you are an SBDC client. Entrants must be a Utah SBDC client to submit. Click <a target="_blank" href="https://utahsbdc.org/request-consulting">here</a> to become an SBDC client. It’s free.</label>
+                </div>
+              </div>
+              <div class="col-md-12 text-right">
+                <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
+              </div>
             </div>
           </form>
         </div>
-
+        <!-- - - - - - ->
+          Coming Soon Posts
+        < - - - - - - -->
         <div ng-if="currentView == 'comingSoonView'">
           <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createCompany('comingSoon')">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="companyName">Company Name (comingSoon):</label>
-                <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+            <div class="col-md-12">
+              <h2 ng-if="educationView" class="text-center">Submit an Education Post</h2>
+              <h2 ng-if="investingView" class="text-center">Submit an Investing Post</h2>
+              <h2 ng-if="comingSoonView" class="text-center">Submit a Coming Soon Post</h2>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="companyName">Company Name:</label>
+                  <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="companyProductName">Product/Tech Name (if different)</label>
+                  <input id="companyProductName" class='form-control' placeholder="Name of product technology" ng-model="newPost.productName">
+                </div>
               </div>
             </div>
-            <div class="col-md-12 text-right">
-              <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="newLogo">Logo (required, jpg or png):</label><br>
+                  <div class="row">
+                    <div class="col-md-3" ng-if="newPost.logo.url">
+                      <input class="hidden" type="text" ng-model="newPost.logo.url">
+                      <input class="hidden" type="text" ng-model="newPost.logo.filename">
+                      <input class="hidden" type="text" ng-model="newPost.logo.bucket">
+                      <!--<div class="img-preview" style="background-image: url({{ newPost.logo.url }})"></div>-->
+                      <div class="img-preview">
+                        <img src="{{ newPost.logo.url }}" alt="company logo">
+                      </div>
+                      <button class="btn-danger btn-delete-photo" ng-click="removeLogo(newPost.logo.bucket, newPost.logo.filename)">Remove</button>
+                    </div>
+                    <div class="newFile text-center col-md-3" ng-if="!newPost.logo.url">
+                      <input type="file" name="file" id="newLogo" class="inputfile" onchange="angular.element(this).scope().logoUpdate(this.files)" ng-model="addNewLogoUpload"/>
+                      <label for="newLogo">Choose a file</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="newFile">Product Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
+                  <div class="row">
+                    <div class="photoPreview col-md-3" ng-repeat="photo in newPost.attachments track by $index">
+                      <input class="hidden" type="text" ng-model="photo.url">
+                      <input class="hidden" type="text" ng-model="photo.filename">
+                      <input class="hidden" type="text" ng-model="photo.bucket">
+                      <!--<div class="img-preview" style="background-image: url({{ photo.url }})"></div>-->
+                      <div class="img-preview">
+                        <img src="{{ photo.url }}" alt="company logo">
+                      </div>
+                      <button class="btn-danger btn-delete-photo" ng-click="removePhoto(photo.bucket, photo.filename)">Remove</button>
+                    </div>
+                    <div class="newFile text-center col-md-3" ng-if="newPost.attachments.length < 4">
+                      <input type="file" name="file" id="newFile" class="inputfile" onchange="angular.element(this).scope().fileUpdate(this.files)" ng-model="addNewFileUpload"/>
+                      <label for="newFile">Choose a file</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <input class='hidden' ng-model="newPost.video">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="companyVideo">Video Url:</label>
+                  <input type="text" id="companyVideo" class='form-control' placeholder="Video URL" ng-model="rawVideoUrl" ng-change="updateVideoUrl()">
+                </div>
+              </div>
+              <!--<div class="col-md-12">-->
+              <!--<div class="form-group">-->
+              <!--<label for="companyVideo">Video Embed Code:</label>-->
+              <input class='hidden' placeholder="Video embed code" ng-model="newPost.video">
+              <!--</div>-->
+              <!--</div>-->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="website">Website or Crowdfunding Link:</label>
+                  <input id="website" class='form-control' placeholder="Website or Crowdfunding Link" ng-model="newPost.website">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="paypal">Paypal email (for accepting donations via this site):</label>
+                  <input id="paypal" class='form-control' placeholder="eric@clapton.com" ng-model="newPost.paypal">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="description">Product Description:</label>
+                  <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
+                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <input type="checkbox" value="" required>
+                  <label>
+                    I agree to the <a target="_blank" href="https://firebasestorage.googleapis.com/v0/b/trendrr-8f523.appspot.com/o/terms-and-conditions.pdf?alt=media&token=df816584-1d20-4ba0-8476-d64437abbd0c">Crowdfund Hero Crowdfunding Competition Terms, Rules & Conditions.</a>
+                    <ul>
+                      <li>I am Utah-based company now or will be by May 1, 2017.</li>
+                      <li>My idea/product is a physical product (i.e., personal electronics, hardware device, clothing, tool, etc.), video game, or software-enabled hardware.</li>
+                      <li>My company does not have higher than $10 million in revenue or equity funding.</li>
+                      <li>I will not donate my own money to my startup to boost my company's score.</li>
+                      <li>I understand that all donations will be dispersed at the amount after merchant fees ($0.30 + 2.9% per transaction)</li>
+                    </ul>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="checkbox">
+                  <label><input type="checkbox" ng-model="sbdcClient">Click if you are an SBDC client. Entrants must be a Utah SBDC client to submit. Click <a target="_blank" href="https://utahsbdc.org/request-consulting">here</a> to become an SBDC client. It’s free.</label>
+                </div>
+              </div>
+              <div class="col-md-12 text-right">
+                <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
+              </div>
             </div>
           </form>
         </div>
-
-
-
-
       </div><!-- /. modal-body -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
