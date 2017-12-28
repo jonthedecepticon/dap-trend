@@ -94,6 +94,7 @@ angular.module('trendrr').controller('LoginCtrl', function ($scope, $firebaseAut
     // }
     // }
     login().then(function (authData, view) {
+      debugger;
       var userObject = userService.getUserByUuid(authData.user.uid);
       userObject.$loaded(function (users) {
         var userExists = (users.length > 0);
@@ -105,7 +106,7 @@ angular.module('trendrr').controller('LoginCtrl', function ($scope, $firebaseAut
           $scope.addUserToUsersArray(authData);
         }
       });
-      console.log('view', view);
+      console.log('view ----', view);
     }).catch(function (error) {
       console.log(error);
     });
@@ -132,7 +133,7 @@ angular.module('trendrr').controller('LoginCtrl', function ($scope, $firebaseAut
         } else {
           $scope.addUserToUsersArray(authData);
         }
-        console.log('view',view);
+        console.log('------view-------',view);
         $rootScope.currentView = view;
         $("#createModal").modal('show'); // hack (should use angular-strap or anguar-ui)
       });

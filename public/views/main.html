@@ -11,20 +11,18 @@
     </div>
 
     <input class="mar30b bold" type='search' ng-model='searchKeyword' placeholder="Search..." autofocus>
-    <h1>{{ currentView }}</h1>
-    <h1>{{ whereAmI }}</h1>
 
     <div class='banner-actions' ng-if="currentView == 'educationView'">
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'education')" id='createBtn'>Submit an Education Post</a>
-      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('education')" id='createBtnEducation'>Log in to Submit an Education Post</a>
+      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('educationView')" id='createBtnEducation'>Log in to Submit an Education Post</a>
     </div>
     <div class='banner-actions' ng-if="currentView == 'investingView'">
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'investing')" id='createBtn'>Submit an Investing Post</a>
-      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('investing')" id='createBtnInvesting'>Log in to Submit an Investing Post</a>
+      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('investingView')" id='createBtnInvesting'>Log in to Submit an Investing Post</a>
     </div>
     <div class='banner-actions' ng-if="currentView == 'comingSoonView'">
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'comingSoon')" id='createBtn'>Submit an Coming Soon Post</a>
-      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('comingSoon')" id='createBtnComingSoon'>Log in to Submit an Coming Soon Post</a>
+      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('comingSoonView')" id='createBtnComingSoon'>Log in to Submit an Coming Soon Post</a>
     </div>
 
   </section>
