@@ -126,7 +126,6 @@ angular.module('trendrr')
 
   $scope.vote = function () {
     var user = userService.user;
-    console.log(user);
     if('uuid' in user){
       var voted = false;
       //could be replaced with $indexFor but why not loop through data we already have instead of double fetching it
@@ -136,7 +135,7 @@ angular.module('trendrr')
         }
       });
       if(!voted){
-        userService.addVoteForCompany($scope.selectedCompany.$id);
+        userService.addVoteForCompany($scope.selectedCompany.$id, $rootScope.currentView);
       } else{
         console.log('already voted');
       }

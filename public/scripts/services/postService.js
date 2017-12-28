@@ -100,16 +100,23 @@ angular.module('trendrr').factory('postService', function postService($rootScope
         //         resolveLogin(authData);
         //     });
         // },
-        incrementCompanyVote: function (companyId, count) {
-            var ref = firebase.database().ref().child('education-posts').child(companyId);
-            $firebaseObject(ref).$loaded(function (company) {
-                if(company.totalVotes){
-                    company.totalVotes+= count;
-                } else{
-                    company.totalVotes = count;
-                }
-                company.$save();
-            });
+        incrementCompanyVote: function (companyId, count, view) {
+          var ref;
+          if (view === 'educationView') {
+            ref = firebase.database().ref().child('education-posts').child(companyId);
+          } else if (view === 'investingView') {
+            ref = firebase.database().ref().child('investing-posts').child(companyId);
+          } else if (view === 'comingSoonView') {
+            ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+          }
+          $firebaseObject(ref).$loaded(function (company) {
+              if(company.totalVotes){
+                company.totalVotes+= count;
+              } else{
+                company.totalVotes = count;
+              }
+              company.$save();
+          });
         },
         incrementFacebookShare: function (companyId, userId) {
 			var sharesRef = firebase.database().ref().child('facebookShares');

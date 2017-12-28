@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('trendrr').service('userService', function ($firebaseArray, $firebaseObject, postService) {
+angular.module('trendrr').service('userService', function ($firebaseArray, $firebaseObject, postService, $rootScope) {
 
   var userData = {};
   var startupOwnerEmailList = [];
@@ -35,18 +35,15 @@ angular.module('trendrr').service('userService', function ($firebaseArray, $fire
       };
       angular.copy(localUser, userData);
     },
-    addVoteForCompany: function(companyId){
-      debugger;
+    addVoteForCompany: function(companyId, view){
       var userId = userData.$id;
-
       var votesRef = firebase.database().ref().child('votes');
       var votesCollection = $firebaseArray(votesRef);
       var query = votesCollection.$ref().orderByChild('userId').equalTo(userId);
       $firebaseArray(query).$loaded(function (votes) {
         var voted = false;
         for (var i = votes.length - 1; i >= 0; i--) {
-          debugger;
-          if(votes[i].companyId === companyId){
+          if(votes[i].companyId === companyId) {
             voted = true;
           }
         }
@@ -61,7 +58,7 @@ angular.module('trendrr').service('userService', function ($firebaseArray, $fire
           };
           votes.$add(newVote).then(function (ref) {
             //increment company votes by 1
-            postService.incrementCompanyVote(companyId, 1);
+            postService.incrementCompanyVote(companyId, 1, $rootScope.currentView);
           }).catch(function (err) {
             console.log('Unable to register', err);
           });
