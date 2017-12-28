@@ -56,6 +56,7 @@ angular.module('trendrr')
       }
     } else {
       $scope.currentView = 'educationView';
+      $rootScope.currentView = 'educationView';
     }
   });
 

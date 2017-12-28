@@ -93,7 +93,7 @@ angular.module('trendrr').controller('LoginCtrl', function ($scope, $firebaseAut
     //     }
     // }
     // }
-    login().then(function (authData, view) {
+    login().then(function (authData) {
       var userObject = userService.getUserByUuid(authData.user.uid);
       userObject.$loaded(function (users) {
         var userExists = (users.length > 0);
@@ -105,7 +105,8 @@ angular.module('trendrr').controller('LoginCtrl', function ($scope, $firebaseAut
           $scope.addUserToUsersArray(authData);
         }
       });
-      console.log('view ----', view);
+      console.log($rootScope.currentView);
+      debugger;
     }).catch(function (error) {
       console.log(error);
     });
