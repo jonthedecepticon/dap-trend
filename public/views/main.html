@@ -5,9 +5,13 @@
 <div class="col" id="center">
   <section class='banner'>
     <div class='deal-banner-logo'>
-      <h1 class="txt-primary">Headline Text...</h1>
+      <h1 class="txt-primary" ng-if="currentView == 'educationView'">Education</h1>
+      <h1 class="txt-primary" ng-if="currentView == 'investingView'">Investing</h1>
+      <h1 class="txt-primary" ng-if="currentView == 'comingSoonView'">Coming Soon</h1>
       <div class="container text-center">
-        <p>Description Text...</p>
+        <p ng-if="currentView == 'educationView'">Description Text For Education...</p>
+        <p ng-if="currentView == 'investingView'">Description Text For Investing...</p>
+        <p ng-if="currentView == 'comingSoonView'">Description Text For Coming Soon...</p>
       </div>
       <br>
     </div>
@@ -26,7 +30,6 @@
       <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'comingSoon')" id='createBtn'>Submit an Coming Soon Post</a>
       <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('comingSoonView')" id='createBtnComingSoon'>Log in to Submit an Coming Soon Post</a>
     </div>
-
   </section>
 </div>
 
@@ -51,7 +54,7 @@
     <!--</div>-->
   <!--</div>-->
 <!--</div>-->
-<div class="alert alert-success text-center" role="alert" ng-if="companySubmitted.submitted">Thank you for your submission! Check back again soon to see your startup after it's approved.</div>
+<div class="alert alert-success text-center" role="alert" ng-if="companySubmitted.submitted">Thank you for your submission!</div>
 
 <div ng-if="emails.length > 0 && user.admin">
   <div class="container">
