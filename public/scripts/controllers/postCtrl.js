@@ -1,5 +1,5 @@
 'use strict';
-angular.module('trendrr').controller('PostController', function ($scope, $firebaseStorage, $firebaseArray, postService, userService, $rootScope) {
+angular.module('trendrr').controller('PostController', function ($scope, $firebaseStorage, $firebaseArray, postService, userService, $rootScope, $http) {
 
   $scope.addNewFileUpload = {};
   $scope.addNewLogoUpload = {};
@@ -26,8 +26,14 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
 
   $scope.whereAmI = 'post controller';
 
+  $scope.newPost.tags = [];
+  $scope.loadTags = function(query) {
+    return $http.get('tags.json');
+  };
+
+
+
   $scope.createCompany = function(postType) {
-    console.log(postType);
     if (postType === 'education') {
       postService.companySubmitted({submitted: true});
       var ref = firebase.database().ref().child('education-posts');
@@ -105,7 +111,7 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
 
   $scope.fileUpdate = function (files) {
     var fileNameSplit = files[0].name.split('.');
-    console.log('FILE', fileNameSplit[fileNameSplit.length - 1]);
+    // console.log('FILE', fileNameSplit[fileNameSplit.length - 1]);
     if(fileNameSplit[fileNameSplit.length - 1] === 'jpg' || fileNameSplit[fileNameSplit.length - 1] === 'png') {
       var fileName = guid() + '.' + fileNameSplit[fileNameSplit.length - 1];
       var storageRef;

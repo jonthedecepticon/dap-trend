@@ -1,7 +1,7 @@
 'use strict';
 // ROUTING
 angular.module('trendrr', [
-	'ui.router',
+  'ui.router',
     'ui.bootstrap',
     'firebase',
     // 'xeditable',
@@ -10,7 +10,8 @@ angular.module('trendrr', [
     'slickCarousel',
     '720kb.socialshare',
     'stripe.checkout',
-    'ngTouch'
+    'ngTouch',
+    'ngTagsInput'
 ]).config(function ($stateProvider, $urlRouterProvider) {
   // UI ROUTER
   $urlRouterProvider.otherwise('/');
