@@ -141,7 +141,7 @@
             <div class="col-md-12 mg-b-md tag-container">
               <ul class="_tags blue">
                 <li ng-repeat="tag in selectedCompany.tags track by $index">
-                  <a href="">{{ tag.text }} <span>4</span></a>
+                  <a href="">{{ tag.text }} <span>{{ getTagCount }}</span></a>
                 </li>
               </ul>
             </div>

@@ -33,12 +33,17 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
 
 
 
-  $scope.createCompany = function(postType) {
+  $scope.createPost = function(postType) {
     if (postType === 'education') {
       postService.companySubmitted({submitted: true});
       var ref = firebase.database().ref().child('education-posts');
       var posts = $firebaseArray(ref);
-      $scope.newPost.approved = false;
+
+
+      // HACK: CHANGE THIS BACK TO false AFTER TESTING
+        $scope.newPost.approved = true;
+      // HACK: CHANGE THIS BACK TO false AFTER TESTING
+
       $scope.newPost.twitterShares = 0;
       $scope.newPost.totalVotes = 0;
       $scope.newPost.facebookShares = 0;

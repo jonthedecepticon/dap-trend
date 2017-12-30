@@ -11,7 +11,7 @@
           Education Posts
         < - - - - - - -->
         <div ng-if="currentView == 'educationView'">
-          <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createCompany('education')">
+          <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createPost('education')">
             <div class="col-md-12">
               <h2 class="text-center">Submit an Education Post</h2>
             </div>
@@ -155,7 +155,7 @@
           Investing Posts
         < - - - - - - -->
         <div ng-if="currentView == 'investingView'">
-          <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createCompany('investing')">
+          <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createPost('investing')">
             <div class="col-md-12">
               <h2 class="text-center">Submit an Investing Post</h2>
             </div>
@@ -289,7 +289,7 @@
           Coming Soon Posts
         < - - - - - - -->
         <div ng-if="currentView == 'comingSoonView'">
-          <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createCompany('comingSoon')">
+          <form name="submissionForm" class="modalForm" ng-controller='PostController' ng-submit="createPost('comingSoon')">
             <div class="col-md-12">
               <h2 class="text-center">Submit a Coming Soon Post</h2>
             </div>

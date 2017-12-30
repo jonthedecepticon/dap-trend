@@ -14,6 +14,8 @@ angular.module('trendrr')
     amount: 10
   };
 
+
+
   $scope.whereAmI = 'list controller';
 
   $scope.user = userService.user;
