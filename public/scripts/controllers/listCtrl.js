@@ -6,9 +6,9 @@ angular.module('trendrr')
   $scope.carouselItems = [];
   $scope.modalLoaded = false;
   $scope.shareActive = false;
-  $scope.selectedCompany = postService.getSelectedCompany;
+  $scope.selectedPost = postService.getSelectedPost;
   $scope.rawVideoUrl = '';
-  $scope.companySubmitted = postService.getCompanySubmitted;
+  $scope.postSubmitted = postService.getPostSubmitted;
   $scope.donation = {
     mode: false,
     amount: 10
@@ -73,28 +73,28 @@ angular.module('trendrr')
   $scope.myValueFunction = function(item) {
     return item.upVotes.value + item.facebookVotes.value + item.twitterVotes.value;
   };
-  $scope.showPostModal = function (company) {
+  $scope.showPostModal = function (post) {
     $scope.modalLoaded = false;
-    $scope.selectedCompany = company;
+    $scope.selectedPost = post;
     $scope.carouselItems = [];
 
-    if(company.video){
+    if(post.video){
       $scope.carouselItems.push({
         type:'video',
-        url: $sce.trustAsHtml(company.video)
+        url: $sce.trustAsHtml(post.video)
       });
     }
-    if(company.logo){
+    if(post.logo){
       $scope.carouselItems.push({
         type:'photo',
-        url:company.logo.url
+        url:post.logo.url
       });
     }
-    if(company.attachments){
-      for (var i = company.attachments.length - 1; i >= 0; i--) {
+    if(post.attachments){
+      for (var i = post.attachments.length - 1; i >= 0; i--) {
         $scope.carouselItems.push({
           type:'photo',
-          url:company.attachments[i].url
+          url:post.attachments[i].url
         });
       }
     }
@@ -121,7 +121,7 @@ angular.module('trendrr')
     }, 300);
   };
 
-  $scope.hideCompanyModal = function(){
+  $scope.hidePostModal = function(){
     $scope.modalLoaded = false;
     $("#modal").modal('hide');
   };
@@ -133,12 +133,12 @@ angular.module('trendrr')
       var voted = false;
       //could be replaced with $indexFor but why not loop through data we already have instead of double fetching it
       angular.forEach(user.votes, function(vote, key){
-        if($scope.selectedCompany.uuid === vote.companyId){
+        if($scope.selectedPost.uuid === vote.postId){
           voted = true;
         }
       });
       if(!voted){
-        userService.addVoteForCompany($scope.selectedCompany.$id, $rootScope.currentView);
+        userService.addVoteForPost($scope.selectedPost.$id, $rootScope.currentView);
       } else{
         console.log('already voted');
       }
@@ -151,11 +151,11 @@ angular.module('trendrr')
     angular.element('#stripeCheckout').triggerHandler('click');
   };
 
-  $scope.getTotalScore = function (company) {
-    var donated = (company.totalDonated) ? company.totalDonated : 0;
-    var votes = (company.totalVotes) ? company.totalVotes : 0;
-    var fb = (company.facebookShares) ? company.facebookShares : 0;
-    var twitter = (company.twitterShares) ? company.twitterShares : 0;
+  $scope.getTotalScore = function (post) {
+    var donated = (post.totalDonated) ? post.totalDonated : 0;
+    var votes = (post.totalVotes) ? post.totalVotes : 0;
+    var fb = (post.facebookShares) ? post.facebookShares : 0;
+    var twitter = (post.twitterShares) ? post.twitterShares : 0;
     return (donated + votes + fb + twitter);
   };
 
@@ -164,7 +164,7 @@ angular.module('trendrr')
       stripeToken: token.id,
       stripeEmail: token.email,
       amount: ($scope.donation.amount * 100),
-      companyName: $scope.selectedCompany.name
+      postName: $scope.selectedPost.name
     };
 
     $http({
@@ -177,7 +177,7 @@ angular.module('trendrr')
     }, function (response) {
       console.log('ERR', response);
     });
-    postService.adjustVotesAndDonations($scope.selectedCompany.$id, $scope.donation.amount);
+    postService.adjustVotesAndDonations($scope.selectedPost.$id, $scope.donation.amount);
 
     // Reset modal and variables
     $scope.donation.amount = 10;
@@ -208,8 +208,8 @@ angular.module('trendrr')
     $("#createModal").modal('hide');
   };
 
-  $scope.approveCompany = function (companyId) {
-    postService.approveCompany(companyId);
+  $scope.approvePost = function (postId) {
+    postService.approvePost(postId);
   };
 
 

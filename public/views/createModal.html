@@ -255,6 +255,16 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="tags">Tags:</label>
+                  <tags-input ng-model="newPost.tags" add-on-paste="true" placeholder="Add a tag..." replace-spaces-with-dashes="false">
+                    <auto-complete source="loadTags($query)" replace-spaces-with-dashes="false" select-first-match="false"></auto-complete>
+                  </tags-input>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
                 </div>
@@ -384,6 +394,16 @@
                   <label for="description">Product Description:</label>
                   <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
                   <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="tags">Tags:</label>
+                  <tags-input ng-model="newPost.tags" add-on-paste="true" placeholder="Add a tag..." replace-spaces-with-dashes="false">
+                    <auto-complete source="loadTags($query)" replace-spaces-with-dashes="false" select-first-match="false"></auto-complete>
+                  </tags-input>
                 </div>
               </div>
             </div>

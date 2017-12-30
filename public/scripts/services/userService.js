@@ -35,7 +35,7 @@ angular.module('trendrr').service('userService', function ($firebaseArray, $fire
       };
       angular.copy(localUser, userData);
     },
-    addVoteForCompany: function(companyId, view){
+    addVoteForPost: function(postId, view){
       var userId = userData.$id;
       var votesRef = firebase.database().ref().child('votes');
       var votesCollection = $firebaseArray(votesRef);
@@ -43,7 +43,7 @@ angular.module('trendrr').service('userService', function ($firebaseArray, $fire
       $firebaseArray(query).$loaded(function (votes) {
         var voted = false;
         for (var i = votes.length - 1; i >= 0; i--) {
-          if(votes[i].companyId === companyId) {
+          if(votes[i].postId === postId) {
             voted = true;
           }
         }
@@ -52,13 +52,13 @@ angular.module('trendrr').service('userService', function ($firebaseArray, $fire
           var ref = firebase.database().ref().child('votes');
           var votes = $firebaseArray(ref);
           var newVote = {
-            companyId: companyId,
+            postId: postId,
             userId: userId,
             dateCreated: Date.now()
           };
           votes.$add(newVote).then(function (ref) {
-            //increment company votes by 1
-            postService.incrementCompanyVote(companyId, 1, $rootScope.currentView);
+            //increment post votes by 1
+            postService.incrementPostVote(postId, 1, $rootScope.currentView);
           }).catch(function (err) {
             console.log('Unable to register', err);
           });

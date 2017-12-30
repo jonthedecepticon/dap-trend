@@ -35,13 +35,13 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
 
   $scope.createPost = function(postType) {
     if (postType === 'education') {
-      postService.companySubmitted({submitted: true});
+      postService.postSubmitted({submitted: true});
       var ref = firebase.database().ref().child('education-posts');
       var posts = $firebaseArray(ref);
 
 
       // HACK: CHANGE THIS BACK TO false AFTER TESTING
-        $scope.newPost.approved = true;
+        $scope.newPost.approved = false;
       // HACK: CHANGE THIS BACK TO false AFTER TESTING
 
       $scope.newPost.twitterShares = 0;
@@ -64,7 +64,7 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
         console.log('Error: ',err)
       });
     } else if (postType === 'investing') {
-      postService.companySubmitted({submitted: true});
+      postService.postSubmitted({submitted: true});
       var ref = firebase.database().ref().child('investing-posts');
       var posts = $firebaseArray(ref);
       $scope.newPost.approved = false;
@@ -88,7 +88,7 @@ angular.module('trendrr').controller('PostController', function ($scope, $fireba
         console.log('Error: ',err)
       });
     } else if (postType === 'comingSoon') {
-      postService.companySubmitted({submitted: true});
+      postService.postSubmitted({submitted: true});
       var ref = firebase.database().ref().child('coming-soon-posts');
       var posts = $firebaseArray(ref);
       $scope.newPost.approved = false;

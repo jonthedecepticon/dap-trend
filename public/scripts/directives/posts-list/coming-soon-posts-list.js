@@ -7,7 +7,7 @@ angular.module('trendrr').directive('comingSoonPostsList', function (userService
       postService.getComingSoonPosts().$loaded(function(posts) {
         $scope.comingSoonPosts = posts;
         for (var i = posts.length - 1; i >= 0; i--) {
-          if(posts[i].$id === $stateParams.selectedCompanyId){
+          if(posts[i].$id === $stateParams.selectedPostId){
             postService.setSelectedPost(posts[i]);
             $scope.showPostModal(posts[i]);
           }

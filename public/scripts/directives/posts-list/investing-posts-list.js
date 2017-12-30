@@ -7,7 +7,7 @@ angular.module('trendrr').directive('investingPostsList', function (userService,
       postService.getInvestingPosts().$loaded(function(posts) {
         $scope.investingPosts = posts;
         for (var i = posts.length - 1; i >= 0; i--) {
-          if(posts[i].$id === $stateParams.selectedCompanyId){
+          if(posts[i].$id === $stateParams.selectedPostId){
             postService.setSelectedPost(posts[i]);
             $scope.showPostModal(posts[i]);
           }

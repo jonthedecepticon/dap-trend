@@ -60,7 +60,7 @@ angular.module('trendrr', [
 
   $stateProvider
   .state('root', {
-    url: '/:selectedCompanyId',
+    url: '/:selectedPostId',
     views: {
       body: body,
       footer: footer,
@@ -68,7 +68,7 @@ angular.module('trendrr', [
     }
   })
   // .state('company', {
-  //     url: "/:selectedCompanyId",
+  //     url: "/:selectedPostId",
   //     views: {
   //         body: body,
   //         footer: footer,

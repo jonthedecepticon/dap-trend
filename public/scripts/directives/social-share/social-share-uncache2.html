@@ -6,28 +6,28 @@
         <button ng-controller="LoginCtrl" ng-if="!user.$id" class="btn" ng-click="submitLogin()">
             <div class="sb-template">Share <i class="fa fa-share" aria-hidden="true"></i></div>
         </button>
-        <h5>{{ company.facebookShares + company.twitterShares | number }} Shares</h5>
+        <h5>{{ post.facebookShares + post.twitterShares | number }} Shares</h5>
     </div>
     <div class="shareLinks" ng-if="active">
         <a href="#"
            socialshare
            socialshare-provider="twitter"
-           socialshare-text="Go vote for {{ company.name }}!"
-           socialshare-url="http://podiumcoin.com/#!/{{ company.$id }}">
+           socialshare-text="Go vote for {{ post.name }}!"
+           socialshare-url="http://podiumcoin.com/#!/{{ post.$id }}">
             <div class="sb-button twitter">
               <button class="btn" ng-click="twitterShare()">
-                <div class="sb-template">{{ company.twitterShares | number }} <i class="fa fa-twitter"></i></div>
+                <div class="sb-template">{{ post.twitterShares | number }} <i class="fa fa-twitter"></i></div>
               </button>
             </div>
         </a>
         <a href="#"
            socialshare
            socialshare-provider="facebook"
-           socialshare-text="Go vote for {{ company.name }}!"
-           socialshare-url="http://podiumcoin.com/#!/{{ company.$id }}">
+           socialshare-text="Go vote for {{ post.name }}!"
+           socialshare-url="http://podiumcoin.com/#!/{{ post.$id }}">
             <div class="sb-button facebook">
               <button class="btn" ng-click="facebookShare()">
-                <div class="sb-template">{{ company.facebookShares | number }} <i class="fa fa-facebook"></i></div>
+                <div class="sb-template">{{ post.facebookShares | number }} <i class="fa fa-facebook"></i></div>
               </button>
             </div>
         </a>

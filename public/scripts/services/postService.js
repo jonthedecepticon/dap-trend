@@ -3,20 +3,20 @@
 angular.module('trendrr').factory('postService', function postService($rootScope, $q, $firebaseObject, $firebaseArray){
 
   var FBURL = "https://blockchain-215cc.firebaseio.com";
-  var companySubmitted = {
+  var postSubmitted = {
     submitted: false
   };
-  var selectedCompany = {};
+  var selectedPost = {};
 
   return {
     getList: function () {
       var ref;
       if ($rootScope.currentView === 'educationView') {
-        ref = firebase.database().ref().child('education-posts').child(companyId);
+        ref = firebase.database().ref().child('education-posts').child(postId);
       } else if ($rootScope.currentView === 'investingView') {
-        ref = firebase.database().ref().child('investing-posts').child(companyId);
+        ref = firebase.database().ref().child('investing-posts').child(postId);
       } else if ($rootScope.currentView === 'comingSoonView') {
-        ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+        ref = firebase.database().ref().child('coming-soon-posts').child(postId);
       }
       // download the data into a local object
       return $firebaseObject(ref);
@@ -35,9 +35,9 @@ angular.module('trendrr').factory('postService', function postService($rootScope
       return $firebaseArray(query);
     },
     setSelectedPost: function(post){
-      angular.copy(post, selectedCompany);
+      angular.copy(post, selectedPost);
     },
-    getSelectedCompany: selectedCompany,
+    getSelectedPost: selectedPost,
     getAllEducationPosts: function() {
       var ref = firebase.database().ref().child('education-posts');
       return $firebaseArray(ref);
@@ -93,50 +93,32 @@ angular.module('trendrr').factory('postService', function postService($rootScope
 
 
 
-    // saveNewCompany: function(company){
-    //     var ref = firebase.database().ref().child('companies');
-    //     var companies = $firebaseArray(ref);
-    //     var company = {
-    //         "picture": authData.user.photoURL,
-    //         "role": 'user',
-    //         "email": authData.user.email,
-    //         "fullName": authData.user.providerData[0].displayName,
-    //         "uid": authData.user.uid,
-    //         "dateCreated": Date.now(),
-    //         "lastLogin": Date.now()
-    //     };
-    //
-    //     users.$save().then(function() {
-    //         setUserData(user);
-    //         resolveLogin(authData);
-    //     });
-    // },
-    incrementCompanyVote: function (companyId, count, view) {
+    incrementPostVote: function (postId, count, view) {
       var ref;
       if (view === 'educationView') {
-        ref = firebase.database().ref().child('education-posts').child(companyId);
+        ref = firebase.database().ref().child('education-posts').child(postId);
       } else if (view === 'investingView') {
-        ref = firebase.database().ref().child('investing-posts').child(companyId);
+        ref = firebase.database().ref().child('investing-posts').child(postId);
       } else if (view === 'comingSoonView') {
-        ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+        ref = firebase.database().ref().child('coming-soon-posts').child(postId);
       }
-      $firebaseObject(ref).$loaded(function (company) {
-        if(company.totalVotes){
-          company.totalVotes+= count;
+      $firebaseObject(ref).$loaded(function (post) {
+        if(post.totalVotes){
+          post.totalVotes+= count;
         } else{
-          company.totalVotes = count;
+          post.totalVotes = count;
         }
-        company.$save();
+        post.$save();
       });
     },
-    incrementFacebookShare: function (companyId, userId) {
+    incrementFacebookShare: function (postId, userId) {
       var sharesRef = firebase.database().ref().child('facebookShares');
       var sharesCollection = $firebaseArray(sharesRef);
       var query = sharesCollection.$ref().orderByChild('userId').equalTo(userId);
       $firebaseArray(query).$loaded(function (shares) {
         var shared = false;
         for (var i = shares.length - 1; i >= 0; i--) {
-          if(shares[i].companyId === companyId){
+          if(shares[i].postId === postId){
             shared = true;
           }
         }
@@ -145,26 +127,26 @@ angular.module('trendrr').factory('postService', function postService($rootScope
           var ref = firebase.database().ref().child('facebookShares');
           var shares = $firebaseArray(ref);
           var newShare = {
-            companyId: companyId,
+            postId: postId,
             userId: userId,
             dateCreated: Date.now()
           };
           shares.$add(newShare).then(function (result) {
             var ref;
             if ($rootScope.currentView === 'educationView') {
-              ref = firebase.database().ref().child('education-posts').child(companyId);
+              ref = firebase.database().ref().child('education-posts').child(postId);
             } else if ($rootScope.currentView === 'investingView') {
-              ref = firebase.database().ref().child('investing-posts').child(companyId);
+              ref = firebase.database().ref().child('investing-posts').child(postId);
             } else if ($rootScope.currentView === 'comingSoonView') {
-              ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+              ref = firebase.database().ref().child('coming-soon-posts').child(postId);
             }
-            $firebaseObject(ref).$loaded(function (company) {
-              if(company.facebookShares){
-                company.facebookShares++;
+            $firebaseObject(ref).$loaded(function (post) {
+              if(post.facebookShares){
+                post.facebookShares++;
               } else{
-                company.facebookShares = 1;
+                post.facebookShares = 1;
               }
-              company.$save();
+              post.$save();
               console.log('Share added');
             });
           }).catch(function (err) {
@@ -175,14 +157,14 @@ angular.module('trendrr').factory('postService', function postService($rootScope
         }
       });
     },
-    incrementTwitterShare: function (companyId, userId) {
+    incrementTwitterShare: function (postId, userId) {
       var sharesRef = firebase.database().ref().child('twitterShares');
       var sharesCollection = $firebaseArray(sharesRef);
       var query = sharesCollection.$ref().orderByChild('userId').equalTo(userId);
       $firebaseArray(query).$loaded(function (shares) {
         var shared = false;
         for (var i = shares.length - 1; i >= 0; i--) {
-          if(shares[i].companyId === companyId){
+          if(shares[i].postId === postId){
             shared = true;
           }
         }
@@ -191,26 +173,26 @@ angular.module('trendrr').factory('postService', function postService($rootScope
           var ref = firebase.database().ref().child('twitterShares');
           var shares = $firebaseArray(ref);
           var newShare = {
-            companyId: companyId,
+            postId: postId,
             userId: userId,
             dateCreated: Date.now()
           };
           shares.$add(newShare).then(function (result) {
             var ref;
             if ($rootScope.currentView === 'educationView') {
-              ref = firebase.database().ref().child('education-posts').child(companyId);
+              ref = firebase.database().ref().child('education-posts').child(postId);
             } else if ($rootScope.currentView === 'investingView') {
-              ref = firebase.database().ref().child('investing-posts').child(companyId);
+              ref = firebase.database().ref().child('investing-posts').child(postId);
             } else if ($rootScope.currentView === 'comingSoonView') {
-              ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+              ref = firebase.database().ref().child('coming-soon-posts').child(postId);
             }
-            $firebaseObject(ref).$loaded(function (company) {
-              if(company.twitterShares){
-                company.twitterShares++;
+            $firebaseObject(ref).$loaded(function (post) {
+              if(post.twitterShares){
+                post.twitterShares++;
               } else{
-                company.twitterShares = 1;
+                post.twitterShares = 1;
               }
-              company.$save();
+              post.$save();
               console.log('Share added');
             });
           }).catch(function (err) {
@@ -221,39 +203,39 @@ angular.module('trendrr').factory('postService', function postService($rootScope
         }
       });
     },
-    adjustVotesAndDonations: function (companyId, amount) {
+    adjustVotesAndDonations: function (postId, amount) {
       var ref;
       if ($rootScope.currentView === 'educationView') {
-        ref = firebase.database().ref().child('education-posts').child(companyId);
+        ref = firebase.database().ref().child('education-posts').child(postId);
       } else if ($rootScope.currentView === 'investingView') {
-        ref = firebase.database().ref().child('investing-posts').child(companyId);
+        ref = firebase.database().ref().child('investing-posts').child(postId);
       } else if ($rootScope.currentView === 'comingSoonView') {
-        ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+        ref = firebase.database().ref().child('coming-soon-posts').child(postId);
       }
-      $firebaseObject(ref).$loaded(function (company) {
-        // company.totalVotes += parseInt(amount);
-        company.totalDonated += parseInt(amount);
-        company.$save();
+      $firebaseObject(ref).$loaded(function (post) {
+        // post.totalVotes += parseInt(amount);
+        post.totalDonated += parseInt(amount);
+        post.$save();
       });
     },
-    approveCompany: function (companyId) {
+    approvePost: function (postId) {
       var ref;
       if ($rootScope.currentView === 'educationView') {
-        ref = firebase.database().ref().child('education-posts').child(companyId);
+        ref = firebase.database().ref().child('education-posts').child(postId);
       } else if ($rootScope.currentView === 'investingView') {
-        ref = firebase.database().ref().child('investing-posts').child(companyId);
+        ref = firebase.database().ref().child('investing-posts').child(postId);
       } else if ($rootScope.currentView === 'comingSoonView') {
-        ref = firebase.database().ref().child('coming-soon-posts').child(companyId);
+        ref = firebase.database().ref().child('coming-soon-posts').child(postId);
       }
-      $firebaseObject(ref).$loaded(function (company) {
-        company.approved = true;
-        company.$save();
+      $firebaseObject(ref).$loaded(function (post) {
+        post.approved = true;
+        post.$save();
       });
     },
-    companySubmitted: function(state){
-      angular.copy(state, companySubmitted);
+    postSubmitted: function(state){
+      angular.copy(state, postSubmitted);
     },
-    getCompanySubmitted: companySubmitted,
+    getPostSubmitted: postSubmitted,
     loginPrompt: function(){
       $('body').toggleClass('modal-open-up');
       if (!$rootScope.loginDeferred) {

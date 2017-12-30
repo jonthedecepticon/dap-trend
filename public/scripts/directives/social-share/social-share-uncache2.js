@@ -3,7 +3,7 @@ angular.module('trendrr').directive('socialShare', function (Socialshare, postSe
         restrict: 'EA',
         replace: false,
         scope: {
-          company: '=',
+          post: '=',
           active: '=',
           user: '='
         },
@@ -12,10 +12,10 @@ angular.module('trendrr').directive('socialShare', function (Socialshare, postSe
             $scope.active = !$scope.active;
           };
           $scope.twitterShare = function () {
-			      postService.incrementTwitterShare($scope.company.$id, $scope.user.$id);
+            postService.incrementTwitterShare($scope.post.$id, $scope.user.$id);
           };
           $scope.facebookShare = function () {
-			      postService.incrementFacebookShare($scope.company.$id, $scope.user.$id);
+            postService.incrementFacebookShare($scope.post.$id, $scope.user.$id);
           };
           $scope.authenticate = function () {
             postService.loginPrompt();

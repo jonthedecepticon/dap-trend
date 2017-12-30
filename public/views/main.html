@@ -19,16 +19,16 @@
     <input class="mar30b bold" type='search' ng-model='searchKeyword' placeholder="Search..." autofocus>
 
     <div class='banner-actions' ng-if="currentView == 'educationView'">
-      <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'education')" id='createBtn'>Submit an Education Post</a>
-      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('educationView')" id='createBtnEducation'>Log in to Submit an Education Post</a>
+      <a ng-if="user.$id && !postSubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'education')" id='createBtn'>Submit an Education Post</a>
+      <a ng-controller="LoginCtrl" ng-if="!user.$id && !postSubmitted.submitted" class="f18" ng-click="loginThenCreateModal('educationView')" id='createBtnEducation'>Log in to Submit an Education Post</a>
     </div>
     <div class='banner-actions' ng-if="currentView == 'investingView'">
-      <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'investing')" id='createBtn'>Submit an Investing Post</a>
-      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('investingView')" id='createBtnInvesting'>Log in to Submit an Investing Post</a>
+      <a ng-if="user.$id && !postSubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'investing')" id='createBtn'>Submit an Investing Post</a>
+      <a ng-controller="LoginCtrl" ng-if="!user.$id && !postSubmitted.submitted" class="f18" ng-click="loginThenCreateModal('investingView')" id='createBtnInvesting'>Log in to Submit an Investing Post</a>
     </div>
     <div class='banner-actions' ng-if="currentView == 'comingSoonView'">
-      <a ng-if="user.$id && !companySubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'comingSoon')" id='createBtn'>Submit an Coming Soon Post</a>
-      <a ng-controller="LoginCtrl" ng-if="!user.$id && !companySubmitted.submitted" class="f18" ng-click="loginThenCreateModal('comingSoonView')" id='createBtnComingSoon'>Log in to Submit an Coming Soon Post</a>
+      <a ng-if="user.$id && !postSubmitted.submitted" class="f18" ng-click="callCreateModal(event, 'comingSoon')" id='createBtn'>Submit an Coming Soon Post</a>
+      <a ng-controller="LoginCtrl" ng-if="!user.$id && !postSubmitted.submitted" class="f18" ng-click="loginThenCreateModal('comingSoonView')" id='createBtnComingSoon'>Log in to Submit an Coming Soon Post</a>
     </div>
   </section>
 </div>
@@ -36,25 +36,7 @@
 <!-- - - - - - ->
   Main List
 < - - - - - - -->
-<!--<div class="container grid" ng-controller="PostController" >-->
-  <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-      <!--<h2>Pending Companies</h2>-->
-      <!--<div class="col-md-4" ng-repeat="company in pendingCompanies" ng-if="pendingCompanies.length > 0">-->
-        <!--<figure class="effect-sadie card" ng-click="showPostModal(company)">-->
-          <!--<img src="{{ company.logo.url }}" alt="{{ company.name }} logo">-->
-          <!--<figcaption>-->
-            <!--<h2>{{ company.name }}</h2>-->
-            <!--<p ng-if="company.productName">{{ company.productName }}</p>-->
-            <!--<p class="description" ng-if="!company.productName">{{ company.description }}</p>-->
-          <!--</figcaption>-->
-        <!--</figure>-->
-      <!--</div>-->
-      <!--<p ng-if="!pendingCompanies">No pending companies</p>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-<div class="alert alert-success text-center" role="alert" ng-if="companySubmitted.submitted">Thank you for your submission!</div>
+<div class="alert alert-success text-center" role="alert" ng-if="postSubmitted.submitted">Thank you for your submission!</div>
 
 <div ng-if="emails.length > 0 && user.admin">
   <div class="container">
@@ -75,26 +57,6 @@
   <coming-soon-posts-list searchKeyword="searchKeyword"></coming-soon-posts-list>
 </div>
 
-  <!--<section class="content">-->
-    <!--<ul class='main-list'>-->
-      <!--<li class="item col-xs-12 col-sm-6 col-md-4 col-lg-3 pad0"-->
-          <!--ng-click="setItem(item, 0)"-->
-          <!--ng-repeat="company in companies | orderBy:'upVotes.value':true| orderBy:myOrder:myOrderReverse | filter: sortField : true | filter: search || property:'tags':search:undefined:true" ng-show="item.name != null"-->
-          <!--ngRepeatFinished>-->
-
-        <!--<img ng-src="{{ item.image }}" ng-mouseover='showOverall(item, $event)'> -->
-
-        <!--<div class="item-info" ng-click="viewProduct(product)">-->
-          <!---->
-          <!--<p class="fl item-title">{{ item.name }}</p> -->
-          <!--<p class="fr txt-primary f700"> {{ item.upVotes.value + ((item.facebookVotes.value + item.twitterVotes.value) / 2) }} </p>-->
-          <!---->
-        <!--</div> -->
-      <!--</li>-->
-    <!--</ul>-->
-  <!--</section>-->
-
-
 <!-- - - - - - ->
   #MODAL
 < - - - - - - -->
@@ -106,12 +68,12 @@
       <div class="modal-body model-open-up">
         <div class="item-modal">
           <div class="sb-button">
-            <button class="btn" ng-if="user.admin && !selectedCompany.approved" ng-click="approveCompany(selectedCompany.$id)">
-              <div class="sb-template" style="color:black"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Approve Company</div>
+            <button class="btn" ng-if="user.admin && !selectedPost.approved" ng-click="approvePost(selectedPost.$id)">
+              <div class="sb-template" style="color:black"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Approve Post</div>
             </button>
           </div>
-          <h2>{{ selectedCompany.name }}<span ng-if="selectedCompany.productName"> - {{ selectedCompany.productName }}</span></h2>
-          <i ng-click="hideCompanyModal()" class="fa fa-times closeModal" aria-hidden="true"></i>
+          <h2>{{ selectedPost.name }}<span ng-if="selectedPost.productName"> - {{ selectedPost.productName }}</span></h2>
+          <i ng-click="hidePostModal()" class="fa fa-times closeModal" aria-hidden="true"></i>
           <div class="row">
             <div class="carousel-wrapper col-md-12">
               <slick ng-if="modalLoaded" settings="slickConfig">
@@ -125,22 +87,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 text-left" ng-if="selectedCompany.description">
+            <div class="col-md-6 text-left" ng-if="selectedPost.description">
               <h4>Description</h4>
             </div>
-            <div class="col-md-6 text-right" ng-if="selectedCompany.website">
-              <a target="_blank" href="{{ selectedCompany.website }}"><i class="fa fa-bolt" aria-hidden="true"></i> {{ selectedCompany.website }}</a>
+            <div class="col-md-6 text-right" ng-if="selectedPost.website">
+              <a target="_blank" href="{{ selectedPost.website }}"><i class="fa fa-bolt" aria-hidden="true"></i> {{ selectedPost.website }}</a>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 mg-b-md">
-              <p>{{ selectedCompany.description }}</p>
+              <p>{{ selectedPost.description }}</p>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 mg-b-md tag-container">
               <ul class="_tags blue">
-                <li ng-repeat="tag in selectedCompany.tags track by $index">
+                <li ng-repeat="tag in selectedPost.tags track by $index">
                   <a href="">{{ tag.text }} <span>{{ getTagCount }}</span></a>
                 </li>
               </ul>
@@ -148,7 +110,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <h4>Score: {{ selectedCompany.totalDonated + selectedCompany.totalVotes + selectedCompany.facebookShares + selectedCompany.twitterShares }}</h4>
+              <h4>Score: {{ selectedPost.totalDonated + selectedPost.totalVotes + selectedPost.facebookShares + selectedPost.twitterShares }}</h4>
             </div>
             <div class="col-xs-12 col-md-7" style="margin-left:-7px">
                 <div class="sb-button vote" ng-if="!donation.mode">
@@ -158,16 +120,16 @@
                   <button ng-if="user.$id" class="btn" ng-click="vote()">
                     <div class="sb-template"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Vote</div>
                   </button>
-                  <h5 style="margin-left: 10px;">{{ selectedCompany.totalVotes | number }} Votes</h5>
+                  <h5 style="margin-left: 10px;">{{ selectedPost.totalVotes | number }} Votes</h5>
                 </div>
                 <div class="sb-button donate">
                   <button class="hidden"
-                          id="stripeCheckout"
-                          stripe-checkout="checkout"
-                          data-key="pk_live_Em7HaC7Qdh0eiV9odVtsIfUC"
-                          data-name="{{ selectedCompany.name }}"
-                          data-description="Donation to {{ selectedCompany.name }}"
-                          data-amount="{{ donation.amount * 100 }}"></button>
+                    id="stripeCheckout"
+                    stripe-checkout="checkout"
+                    data-key="pk_live_Em7HaC7Qdh0eiV9odVtsIfUC"
+                    data-name="{{ selectedPost.name }}"
+                    data-description="Donation to {{ selectedPost.name }}"
+                    data-amount="{{ donation.amount * 100 }}"></button>
 
                   <div class="form-group" ng-if="donation.mode">
                     <label for="donationAmount">Donation Amount in dollars</label>
@@ -175,15 +137,15 @@
                   </div>
 
                   <button class="btn" ng-click="donation.mode = true" ng-if="!donation.mode">
-                    <div ng-if="!(selectedCompany.totalDonated > 0)" class="sb-template">Donate</div>
-                    <div ng-if="selectedCompany.totalDonated > 0" class="sb-template">Donate</div>
+                    <div ng-if="!(selectedPost.totalDonated > 0)" class="sb-template">Donate</div>
+                    <div ng-if="selectedPost.totalDonated > 0" class="sb-template">Donate</div>
                   </button>
-                  <h5 ng-if="!donation.mode" style="margin-left: 10px;">{{ selectedCompany.totalDonated | currency }} Donated</h5>
+                  <h5 ng-if="!donation.mode" style="margin-left: 10px;">{{ selectedPost.totalDonated | currency }} Donated</h5>
 
                   <button class="btn" ng-click="donate()" ng-if="donation.mode" ng-disabled="!(donation.amount > 0)">
                     <div class="sb-template">Donate {{ donation.amount | currency }}</div>
                   </button>
-                  <p ng-if="donation.mode">After merchant fees, {{ (donation.amount - 0.3) * 0.97 | currency }} will be donated to {{ selectedCompany.name }}.</p>
+                  <p ng-if="donation.mode">After merchant fees, {{ (donation.amount - 0.3) * 0.97 | currency }} will be donated to {{ selectedPost.name }}.</p>
                 </div>
               <div class="clearfix"></div>
               <div class="col-md-12" style="margin-left: -7px;">
@@ -191,7 +153,7 @@
               </div>
 
             </div>
-            <social-share class="col-xs-12 col-md-5 text-right" user="user" company="selectedCompany" active="shareActive"></social-share>
+            <social-share class="col-xs-12 col-md-5 text-right" user="user" post="selectedPost" active="shareActive"></social-share>
           </div>
 
         </div>
