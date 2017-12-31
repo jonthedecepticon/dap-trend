@@ -49,6 +49,7 @@
 }
 
 ._tags a, ._tags span {
+  cursor: default;
   display: block;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -77,7 +78,7 @@
 }
 
 ._tags a:hover span {
-  padding: 0 7px 0 6px;
+  // padding: 0 7px 0 6px;
   max-width: 40px;
   -webkit-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), 1px 1px 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15), 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -142,4 +143,17 @@
   background-image: -moz-linear-gradient(top, #6aaeda, #4298d0);
   background-image: -o-linear-gradient(top, #6aaeda, #4298d0);
   background-image: linear-gradient(to bottom, #6aaeda, #4298d0);
+}
+
+tags-input .tags {
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }

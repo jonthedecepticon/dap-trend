@@ -21,9 +21,6 @@ angular.module('trendrr').factory('postService', function postService($rootScope
       // download the data into a local object
       return $firebaseObject(ref);
     },
-    getTagsCount: function(blah) {
-      console.log('got it', blah);
-    },
     getUsers: function () {
       var ref = firebase.database().ref().child('users');
       return $firebaseObject(ref);
