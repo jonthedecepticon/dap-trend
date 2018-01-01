@@ -18,21 +18,21 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="companyName">Company Name:</label>
-                  <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+                  <label for="companyName">Title:</label>
+                  <input id="companyName" class='form-control' placeholder="Title" ng-model="newPost.name" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="companyProductName">Product/Tech Name (if different)</label>
-                  <input id="companyProductName" class='form-control' placeholder="Name of product technology" ng-model="newPost.productName">
+                  <label for="companyProductName">Talent:</label>
+                  <input id="companyProductName" class='form-control' placeholder="Talent" ng-model="newPost.productName">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="newLogo">Logo (required, jpg or png):</label><br>
+                  <label for="newLogo">Cover Image (required, jpg or png):</label><br>
                   <div class="row">
                     <div class="col-md-3" ng-if="newPost.logo.url">
                       <input class="hidden" type="text" ng-model="newPost.logo.url">
@@ -53,7 +53,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="newFile">Product Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
+                  <label for="newFile">More Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
                   <div class="row">
                     <div class="photoPreview col-md-3" ng-repeat="photo in newPost.attachments track by $index">
                       <input class="hidden" type="text" ng-model="photo.url">
@@ -89,25 +89,16 @@
               <!--</div>-->
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="website">Website or Crowdfunding Link:</label>
-                  <input id="website" class='form-control' placeholder="Website or Crowdfunding Link" ng-model="newPost.website">
+                  <label for="website">Website Link:</label>
+                  <input id="website" class='form-control' placeholder="Website Link" ng-model="newPost.website">
                 </div>
               </div>
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label for="paypal">Paypal email (for accepting donations via this site):</label>
                   <input id="paypal" class='form-control' placeholder="eric@clapton.com" ng-model="newPost.paypal">
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="description">Product Description:</label>
-                  <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
-                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
-                </div>
-              </div>
+              </div> -->
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -121,11 +112,20 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <textarea id="description" class='form-control' placeholder="Tell us about your post and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
+                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
                 </div>
-              </div>
-              <div class="col-md-12">
+              </div> -->
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <input type="checkbox" value="" required>
                   <label>
@@ -139,12 +139,12 @@
                     </ul>
                   </label>
                 </div>
-              </div>
-              <div class="col-md-12">
+              </div> -->
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" ng-model="sbdcClient">Click if you are an SBDC client. Entrants must be a Utah SBDC client to submit. Click <a target="_blank" href="https://utahsbdc.org/request-consulting">here</a> to become an SBDC client. It’s free.</label>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-12 text-right">
                 <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
               </div>
@@ -162,21 +162,21 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="companyName">Company Name:</label>
-                  <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+                  <label for="companyName">Title:</label>
+                  <input id="companyName" class='form-control' placeholder="Title" ng-model="newPost.name" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="companyProductName">Product/Tech Name (if different)</label>
-                  <input id="companyProductName" class='form-control' placeholder="Name of product technology" ng-model="newPost.productName">
+                  <label for="companyProductName">Talent:</label>
+                  <input id="companyProductName" class='form-control' placeholder="Talent" ng-model="newPost.productName">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="newLogo">Logo (required, jpg or png):</label><br>
+                  <label for="newLogo">Cover Image (required, jpg or png):</label><br>
                   <div class="row">
                     <div class="col-md-3" ng-if="newPost.logo.url">
                       <input class="hidden" type="text" ng-model="newPost.logo.url">
@@ -197,7 +197,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="newFile">Product Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
+                  <label for="newFile">More Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
                   <div class="row">
                     <div class="photoPreview col-md-3" ng-repeat="photo in newPost.attachments track by $index">
                       <input class="hidden" type="text" ng-model="photo.url">
@@ -233,25 +233,16 @@
               <!--</div>-->
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="website">Website or Crowdfunding Link:</label>
-                  <input id="website" class='form-control' placeholder="Website or Crowdfunding Link" ng-model="newPost.website">
+                  <label for="website">Website Link:</label>
+                  <input id="website" class='form-control' placeholder="Website Link" ng-model="newPost.website">
                 </div>
               </div>
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label for="paypal">Paypal email (for accepting donations via this site):</label>
                   <input id="paypal" class='form-control' placeholder="eric@clapton.com" ng-model="newPost.paypal">
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="description">Product Description:</label>
-                  <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
-                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
-                </div>
-              </div>
+              </div> -->
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -265,11 +256,20 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <textarea id="description" class='form-control' placeholder="Tell us about your post and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
+                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
                 </div>
-              </div>
-              <div class="col-md-12">
+              </div> -->
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <input type="checkbox" value="" required>
                   <label>
@@ -283,12 +283,12 @@
                     </ul>
                   </label>
                 </div>
-              </div>
-              <div class="col-md-12">
+              </div> -->
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" ng-model="sbdcClient">Click if you are an SBDC client. Entrants must be a Utah SBDC client to submit. Click <a target="_blank" href="https://utahsbdc.org/request-consulting">here</a> to become an SBDC client. It’s free.</label>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-12 text-right">
                 <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
               </div>
@@ -306,21 +306,21 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="companyName">Company Name:</label>
-                  <input id="companyName" class='form-control' placeholder="Company Name" ng-model="newPost.name" required>
+                  <label for="companyName">Title:</label>
+                  <input id="companyName" class='form-control' placeholder="Title" ng-model="newPost.name" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="companyProductName">Product/Tech Name (if different)</label>
-                  <input id="companyProductName" class='form-control' placeholder="Name of product technology" ng-model="newPost.productName">
+                  <label for="companyProductName">Talent:</label>
+                  <input id="companyProductName" class='form-control' placeholder="Talent" ng-model="newPost.productName">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="newLogo">Logo (required, jpg or png):</label><br>
+                  <label for="newLogo">Cover Image (required, jpg or png):</label><br>
                   <div class="row">
                     <div class="col-md-3" ng-if="newPost.logo.url">
                       <input class="hidden" type="text" ng-model="newPost.logo.url">
@@ -341,7 +341,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="newFile">Product Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
+                  <label for="newFile">More Photos (jpg or png): ({{ 4-newPost.attachments.length }}/4 remaining)</label>
                   <div class="row">
                     <div class="photoPreview col-md-3" ng-repeat="photo in newPost.attachments track by $index">
                       <input class="hidden" type="text" ng-model="photo.url">
@@ -377,25 +377,16 @@
               <!--</div>-->
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="website">Website or Crowdfunding Link:</label>
-                  <input id="website" class='form-control' placeholder="Website or Crowdfunding Link" ng-model="newPost.website">
+                  <label for="website">Website Link:</label>
+                  <input id="website" class='form-control' placeholder="Website Link" ng-model="newPost.website">
                 </div>
               </div>
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="form-group">
                   <label for="paypal">Paypal email (for accepting donations via this site):</label>
                   <input id="paypal" class='form-control' placeholder="eric@clapton.com" ng-model="newPost.paypal">
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="description">Product Description:</label>
-                  <textarea id="description" class='form-control' placeholder="Tell us about your product and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
-                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
-                </div>
-              </div>
+              </div> -->
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -409,11 +400,20 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <textarea id="description" class='form-control' placeholder="Tell us about your post and why you are creating it..." ng-model="newPost.description" ng-trim="false" maxlength="750"></textarea>
+                  <span>{{ 750 - newPost.description.length }} characters remaining</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" value="" required>Click if you are a Utah-based resident or a Utah-based company. Entrants must be Utah-based to submit.</label>
                 </div>
-              </div>
-              <div class="col-md-12">
+              </div> -->
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <input type="checkbox" value="" required>
                   <label>
@@ -427,12 +427,12 @@
                     </ul>
                   </label>
                 </div>
-              </div>
-              <div class="col-md-12">
+              </div> -->
+              <!-- <div class="col-md-12">
                 <div class="checkbox">
                   <label><input type="checkbox" ng-model="sbdcClient">Click if you are an SBDC client. Entrants must be a Utah SBDC client to submit. Click <a target="_blank" href="https://utahsbdc.org/request-consulting">here</a> to become an SBDC client. It’s free.</label>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-12 text-right">
                 <button type='submit' class='btn btn-primary' id='submitBtn'> Submit </button>
               </div>
